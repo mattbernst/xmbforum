@@ -2227,6 +2227,7 @@ $pwtd
 <td bgcolor="$altbg1" width="22%">$lang[textemail]</td>
 <td bgcolor="$altbg2"><input type="text" name="email" size="25" value="" /></td>
 </tr>
+$regcaptchachem
 $regoptional
 <tr>
 <td colspan="2" class="category"><font color="$cattext"><strong>$lang[textregister] - $lang[textoptions]</strong></font></td>
@@ -2375,6 +2376,19 @@ $captcharegcheck
 <p id="avatarCheck" style="display: inline;"></p>
 </td>
 </tr>
+
+
+|#*XMB TEMPLATE FILE*#|member_reg_captcha_chem|#*XMB TEMPLATE*#|
+<tr>
+<td colspan="2" class="category">
+    <font color="$cattext"><strong>Spam Prevention</strong></font></td>
+</tr>
+<tr class="tablerow"><td colspan="2" bgcolor="$altbg1">To prevent automated registrations and spam posts all 
+members are asked to answer a question when joining</td></tr>
+<tr class="tablerow"><td bgcolor="$altbg1">$captcha_chem_text</td>
+<input type="hidden" name="qcode" value="$captcha_chem_q_code"/>
+<td bgcolor="$altbg2"><input type="text" name="captcharesponse" size="25"/></td></tr>
+
 
 |#*XMB TEMPLATE FILE*#|member_reg_captcha|#*XMB TEMPLATE*#|
 <tr>
