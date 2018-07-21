@@ -306,6 +306,16 @@ switch($action) {
                         eval('$captcharegcheck = "'.template('member_reg_captcha').'";');
                     }
                 }
+
+
+                $query = $db->query("SELECT * FROM captcha_question ORDER BY RAND() LIMIT 1");
+		        $captcha_chem_question = $db->fetch_array($query);
+		        $captcha_chem_text = $captcha_chem_question["question"];
+		        $captcha_chem_q_code = $captcha_chem_question["questionid"];
+		        $db->free_result($query);
+                eval('$regcaptchachem = "'.template('member_reg_captcha_chem').'";');
+
+
                 eval('$memberpage = "'.template('member_reg').'";');
             }
         } else {
@@ -450,6 +460,20 @@ switch($action) {
                     }
                 }
             }
+
+
+            if (!is_numeric($_POST['qcode'])) {
+		        error("Corrupted data returned in form.");
+	        }
+	        $qid = intval($_POST['qcode']);
+	        $query = "SELECT * FROM captcha_question WHERE questionid = '$qid'";
+	        $result = $db->query($query);
+	        $captcha_q = $db->fetch_array($result);
+	        if (strtolower($captcha_q['answer']) != strtolower($_POST['captcharesponse'])) {
+	    	    error("The response to the CAPTCHA challenge was incorrect.");
+	        }
+	        $db->free_result($result);
+
 
             $langfilenew = postedVar('langfilenew');
             $result = $db->query("SELECT devname FROM ".X_PREFIX."lang_base WHERE devname='$langfilenew'");
